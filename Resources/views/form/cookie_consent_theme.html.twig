@@ -1,22 +1,20 @@
-{% block choice_row %}
-    <div class="ch-cookie-consent__category">
-        <div class="ch-cookie-consent__category-toggle">
-            {% for child in form %}
-                {% if not child.rendered %}
-                    {{- form_widget(child) -}}
-                    {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
-                {% endif %}
-            {% endfor %}
-        </div>
-        <div class="ch-cookie-consent__category-information">
-            <h4 class="ch-cookie-consent__category-title">{{ ('ch_cookie_consent.'~name~'.title')|trans({}, 'CHCookieConsentBundle') }}</h4>
-            <p class="ch-cookie-consent__category-description">{{ ('ch_cookie_consent.'~name~'.description')|trans({}, 'CHCookieConsentBundle') }}</p>
-        </div>
+{% block checkbox_row -%}
+    {% if not form.rendered %}
+    <div class="custom-control custom-switch">
+        <input type="checkbox" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" required="required" class="custom-control-input" value="{{ form.vars.value }}" {{ form.vars.checked == 1 ? 'checked=\"checked\"' : ''}}>
+        <label class="custom-control-label" for="{{ form.vars.id }}">&nbsp;
+            <span class="invalid-feedback"></span>
+        </label>
+    </div>
+    {% endif %}
+    <div>
+        <h5 class="cconsent-category-title">{{ ('cookie_consent_translation.'~name~'.title')|trans({}, 'CookieConsentBundle') }}</h5>
+        <small class="cconsent-category-description">{{ ('cookie_consent_translation.'~name~'.description')|trans({}, 'CookieConsentBundle') }}</small>
     </div>
 {% endblock %}
 
 {% block submit_row %}
-    <div class="ch-cookie-consent__btn-wrapper">
+    <div class="vertical-col">
         {{ block('button_widget') }}
     </div>
 {% endblock %}

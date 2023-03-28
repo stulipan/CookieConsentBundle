@@ -2,22 +2,19 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ConnectHolland CookieConsentBundle package.
- * (c) Connect Holland.
- */
 
-namespace ConnectHolland\CookieConsentBundle\Tests\DependencyInjection;
 
-use ConnectHolland\CookieConsentBundle\DependencyInjection\CHCookieConsentExtension;
+namespace Stulipan\CookieConsentBundle\Tests\DependencyInjection;
+
+use Stulipan\CookieConsentBundle\DependencyInjection\CookieConsentExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Parser;
 
-class CHCookieConsentExtensionTest extends TestCase
+class CookieConsentExtensionTest extends TestCase
 {
     /**
-     * @var CHCookieConsentExtension
+     * @var CookieConsentExtension
      */
     private $chCookieConsentExtension;
 
@@ -28,7 +25,7 @@ class CHCookieConsentExtensionTest extends TestCase
 
     public function setUp(): void
     {
-        $this->chCookieConsentExtension = new CHCookieConsentExtension();
+        $this->chCookieConsentExtension = new CookieConsentExtension();
         $this->configuration            = new ContainerBuilder();
     }
 
@@ -36,9 +33,8 @@ class CHCookieConsentExtensionTest extends TestCase
     {
         $this->createConfiguration($this->getFullConfig());
 
-        $this->assertParameter(['analytics', 'tracking', 'marketing', 'social_media'], 'ch_cookie_consent.categories');
-        $this->assertParameter('dark', 'ch_cookie_consent.theme');
-        $this->assertParameter('top', 'ch_cookie_consent.position');
+        $this->assertParameter(['statistics', 'tracking', 'marketing', 'social_media'], 'cookie_consent.categories');
+        $this->assertParameter('top', 'cookie_consent.position');
     }
 
     /**

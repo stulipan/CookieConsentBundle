@@ -2,14 +2,9 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ConnectHolland CookieConsentBundle package.
- * (c) Connect Holland.
- */
+namespace Stulipan\CookieConsentBundle\Cookie;
 
-namespace ConnectHolland\CookieConsentBundle\Cookie;
-
-use ConnectHolland\CookieConsentBundle\Entity\CookieConsentLog;
+use Stulipan\CookieConsentBundle\Entity\CookieConsentLog;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;

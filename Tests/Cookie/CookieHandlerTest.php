@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ConnectHolland CookieConsentBundle package.
- * (c) Connect Holland.
- */
 
-namespace ConnectHolland\CookieConsentBundle\Tests\Cookie;
 
-use ConnectHolland\CookieConsentBundle\Cookie\CookieHandler;
+namespace Stulipan\CookieConsentBundle\Tests\Cookie;
+
+use Stulipan\CookieConsentBundle\Cookie\CookieHandler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 

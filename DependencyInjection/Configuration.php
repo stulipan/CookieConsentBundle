@@ -2,16 +2,13 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ConnectHolland CookieConsentBundle package.
- * (c) Connect Holland.
- */
 
-namespace ConnectHolland\CookieConsentBundle\DependencyInjection;
 
-use ConnectHolland\CookieConsentBundle\Enum\CategoryEnum;
-use ConnectHolland\CookieConsentBundle\Enum\PositionEnum;
-use ConnectHolland\CookieConsentBundle\Enum\ThemeEnum;
+namespace Stulipan\CookieConsentBundle\DependencyInjection;
+
+use Stulipan\CookieConsentBundle\Enum\CategoryEnum;
+use Stulipan\CookieConsentBundle\Enum\PositionEnum;
+use Stulipan\CookieConsentBundle\Enum\ThemeEnum;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -19,23 +16,19 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('ch_cookie_consent');
+        $treeBuilder = new TreeBuilder('cookie_consent');
 
         if (method_exists($treeBuilder, 'getRootNode')) {
             $rootNode = $treeBuilder->getRootNode();
         } else {
             // BC layer for symfony/config 4.1 and older
-            $rootNode = /* @scrutinizer ignore-deprecated */ $treeBuilder->root('ch_cookie_consent');
+            $rootNode = /* @scrutinizer ignore-deprecated */ $treeBuilder->root('cookie_consent');
         }
 
         $rootNode
             ->children()
                 ->variableNode('categories')
-                    ->defaultValue([CategoryEnum::CATEGORY_TRACKING, CategoryEnum::CATEGORY_MARKETING, CategoryEnum::CATEGORY_SOCIAL_MEDIA])
-                ->end()
-                ->enumNode('theme')
-                    ->defaultValue(ThemeEnum::THEME_LIGHT)
-                    ->values(ThemeEnum::getAvailableThemes())
+                    ->defaultValue([CategoryEnum::CATEGORY_STATISTICS, CategoryEnum::CATEGORY_PERSONALIZATION, CategoryEnum::CATEGORY_MARKETING])
                 ->end()
                 ->enumNode('position')
                     ->defaultValue(PositionEnum::POSITION_TOP)
@@ -55,6 +48,9 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->booleanNode('csrf_protection')
                     ->defaultTrue()
+                ->end()
+                ->scalarNode('privacy_policy_url')
+                    ->defaultNull()
                 ->end()
             ->end()
         ;

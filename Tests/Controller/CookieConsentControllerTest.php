@@ -2,16 +2,13 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ConnectHolland CookieConsentBundle package.
- * (c) Connect Holland.
- */
 
-namespace ConnectHolland\CookieConsentBundle\Tests\Controller;
 
-use ConnectHolland\CookieConsentBundle\Controller\CookieConsentController;
-use ConnectHolland\CookieConsentBundle\Cookie\CookieChecker;
-use ConnectHolland\CookieConsentBundle\Form\CookieConsentType;
+namespace Stulipan\CookieConsentBundle\Tests\Controller;
+
+use Stulipan\CookieConsentBundle\Controller\CookieConsentController;
+use Stulipan\CookieConsentBundle\Cookie\CookieChecker;
+use Stulipan\CookieConsentBundle\Form\CookieConsentType;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormFactoryInterface;

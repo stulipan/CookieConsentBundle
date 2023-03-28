@@ -2,14 +2,9 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ConnectHolland CookieConsentBundle package.
- * (c) Connect Holland.
- */
+namespace Stulipan\CookieConsentBundle\Cookie;
 
-namespace ConnectHolland\CookieConsentBundle\Cookie;
-
-use ConnectHolland\CookieConsentBundle\Enum\CookieNameEnum;
+use Stulipan\CookieConsentBundle\Enum\CookieNameEnum;
 use DateInterval;
 use DateTime;
 use Symfony\Component\HttpFoundation\Cookie;

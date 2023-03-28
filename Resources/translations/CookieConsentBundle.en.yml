@@ -1,0 +1,20 @@
+cookie_consent_translation:
+    title: 'This site uses cookies to offer you a better browsing experience. Find out more on <a href="{{ link }}">how we use cookies</a>.'
+    intro: ''
+    necessary:
+        title: 'Strictly necessary cookies'
+        description: 'Strictly necessary cookies allow core website functionality such as user login or saving a wish list. The website cannot be used properly without strictly necessary cookies.'
+    statistics:
+        title: 'Performance cookies'
+        description: 'These cookies are used to see how visitors use the website, eg. analytics cookies. Those cookies cannot be used to directly identify a certain visitor.'
+    personalization:
+        title: 'Personalization'
+        description: 'Personalization cookies are used to remember visitor information on the website, eg. language, timezone, products in cart, enhanced content.'
+    marketing:
+        title: 'Marketing cookies'
+        description: 'These are used to identify visitors between different websites, eg. content partners, banner networks. Those cookies may be used by companies to build a profile of visitor interests or show relevant ads on other websites.'
+    save_selected_button: 'Save selected'
+    use_only_functional_cookies_button: 'Only essential cookies'
+    use_all_cookies_button: 'Accept all cookies'
+    show_cookie_settings_button: 'Cookie settings'
+    hide_cookie_settings_button: 'Close'

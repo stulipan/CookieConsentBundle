@@ -2,28 +2,25 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ConnectHolland CookieConsentBundle package.
- * (c) Connect Holland.
- */
 
-namespace ConnectHolland\CookieConsentBundle\Tests\Twig;
 
-use ConnectHolland\CookieConsentBundle\Twig\CHCookieConsentTwigExtension;
+namespace Stulipan\CookieConsentBundle\Tests\Twig;
+
+use Stulipan\CookieConsentBundle\Twig\CookieConsentTwigExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bridge\Twig\AppVariable;
 use Symfony\Component\HttpFoundation\Request;
 
-class CHCookieConsentTwigExtensionTest extends TestCase
+class CookieConsentTwigExtensionTest extends TestCase
 {
     /**
-     * @var CHCookieConsentTwigExtension
+     * @var CookieConsentTwigExtension
      */
     private $chCookieConsentTwigExtension;
 
     public function setUp(): void
     {
-        $this->chCookieConsentTwigExtension = new CHCookieConsentTwigExtension();
+        $this->chCookieConsentTwigExtension = new CookieConsentTwigExtension();
     }
 
     public function testGetFunctions(): void
@@ -31,8 +28,8 @@ class CHCookieConsentTwigExtensionTest extends TestCase
         $functions = $this->chCookieConsentTwigExtension->getFunctions();
 
         $this->assertCount(2, $functions);
-        $this->assertSame('chcookieconsent_isCookieConsentSavedByUser', $functions[0]->getName());
-        $this->assertSame('chcookieconsent_isCategoryAllowedByUser', $functions[1]->getName());
+        $this->assertSame('cookieConsent_isCookieConsentSavedByUser', $functions[0]->getName());
+        $this->assertSame('cookieConsent_isCategoryAllowedByUser', $functions[1]->getName());
     }
 
     public function testIsCookieConsentSavedByUser(): void

@@ -2,15 +2,12 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ConnectHolland CookieConsentBundle package.
- * (c) Connect Holland.
- */
 
-namespace ConnectHolland\CookieConsentBundle\Tests\Cookie;
 
-use ConnectHolland\CookieConsentBundle\Cookie\CookieLogger;
-use ConnectHolland\CookieConsentBundle\Entity\CookieConsentLog;
+namespace Stulipan\CookieConsentBundle\Tests\Cookie;
+
+use Stulipan\CookieConsentBundle\Cookie\CookieLogger;
+use Stulipan\CookieConsentBundle\Entity\CookieConsentLog;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;

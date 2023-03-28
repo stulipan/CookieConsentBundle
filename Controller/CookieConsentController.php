@@ -2,19 +2,16 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ConnectHolland CookieConsentBundle package.
- * (c) Connect Holland.
- */
+namespace Stulipan\CookieConsentBundle\Controller;
 
-namespace ConnectHolland\CookieConsentBundle\Controller;
-
-use ConnectHolland\CookieConsentBundle\Cookie\CookieChecker;
-use ConnectHolland\CookieConsentBundle\Form\CookieConsentType;
+use Stulipan\CookieConsentBundle\Cookie\CookieChecker;
+use Stulipan\CookieConsentBundle\Form\CookieConsentType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -45,11 +42,6 @@ class CookieConsentController
     /**
      * @var string
      */
-    private $cookieConsentTheme;
-
-    /**
-     * @var string
-     */
     private $cookieConsentPosition;
 
     /**
@@ -67,43 +59,41 @@ class CookieConsentController
      */
     private $formAction;
 
-    public function __construct(
-        Environment $twigEnvironment,
-        FormFactoryInterface $formFactory,
-        CookieChecker $cookieChecker,
-        RouterInterface $router,
-        string $cookieConsentTheme,
-        string $cookieConsentPosition,
-        TranslatorInterface $translator,
-        bool $cookieConsentSimplified = false,
-        string $formAction = null
-    ) {
+    /**
+     * @var string|null
+     */
+    private $privacyPolicyUrl;
+
+    public function __construct(Environment $twigEnvironment, FormFactoryInterface $formFactory, CookieChecker $cookieChecker, RouterInterface $router,
+                                string $cookieConsentPosition, TranslatorInterface $translator, bool $cookieConsentSimplified = false,
+                                string $formAction = null, string $privacyPolicyUrl = null)
+    {
         $this->twigEnvironment         = $twigEnvironment;
         $this->formFactory             = $formFactory;
         $this->cookieChecker           = $cookieChecker;
         $this->router                  = $router;
-        $this->cookieConsentTheme      = $cookieConsentTheme;
         $this->cookieConsentPosition   = $cookieConsentPosition;
         $this->translator              = $translator;
         $this->cookieConsentSimplified = $cookieConsentSimplified;
         $this->formAction              = $formAction;
+        $this->privacyPolicyUrl        = $privacyPolicyUrl;
     }
 
     /**
      * Show cookie consent.
      *
-     * @Route("/cookie_consent", name="ch_cookie_consent.show")
+     * @Route("/cookie_consent", name="cookie_consent.show")
      */
     public function show(Request $request): Response
     {
         $this->setLocale($request);
 
         $response = new Response(
-            $this->twigEnvironment->render('@CHCookieConsent/cookie_consent.html.twig', [
+            $this->twigEnvironment->render('@CookieConsent/cookie_consent.html.twig', [
                 'form'       => $this->createCookieConsentForm()->createView(),
-                'theme'      => $this->cookieConsentTheme,
                 'position'   => $this->cookieConsentPosition,
                 'simplified' => $this->cookieConsentSimplified,
+                'privacyPolicyUrl' => $this->privacyPolicyUrl,
             ])
         );
 
@@ -117,7 +107,7 @@ class CookieConsentController
     /**
      * Show cookie consent.
      *
-     * @Route("/cookie_consent_alt", name="ch_cookie_consent.show_if_cookie_consent_not_set")
+     * @Route("/cookie_consent_alt", name="cookie_consent.show_if_cookie_consent_not_set")
      */
     public function showIfCookieConsentNotSet(Request $request): Response
     {
@@ -159,4 +149,5 @@ class CookieConsentController
             $request->setLocale($locale);
         }
     }
+
 }

@@ -2,16 +2,12 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ConnectHolland CookieConsentBundle package.
- * (c) Connect Holland.
- */
+namespace Stulipan\CookieConsentBundle\Form;
 
-namespace ConnectHolland\CookieConsentBundle\Form;
-
-use ConnectHolland\CookieConsentBundle\Cookie\CookieChecker;
+use Stulipan\CookieConsentBundle\Cookie\CookieChecker;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -40,14 +36,10 @@ class CookieConsentType extends AbstractType
      */
     protected $csrfProtection;
 
-    public function __construct(
-        CookieChecker $cookieChecker,
-        array $cookieCategories,
-        bool $cookieConsentSimplified = false,
-        bool $csrfProtection = true
-    ) {
+    public function __construct(CookieChecker $cookieChecker, array $cookieCategories, bool $cookieConsentSimplified = false, bool $csrfProtection = true)
+    {
         $this->cookieChecker           = $cookieChecker;
-        $this->cookieCategories        = $cookieCategories;
+        $this->cookieCategories        = $cookieCategories; // $cookieConsentSimplified ? [] : $cookieCategories; // if isSimplified then we have no categories
         $this->cookieConsentSimplified = $cookieConsentSimplified;
         $this->csrfProtection          = $csrfProtection;
     }
@@ -57,34 +49,75 @@ class CookieConsentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        foreach ($this->cookieCategories as $category) {
-            $builder->add($category, ChoiceType::class, [
-                'expanded' => true,
-                'multiple' => false,
-                'data'     => $this->cookieChecker->isCategoryAllowedByUser($category) ? 'true' : 'false',
-                'choices'  => [
-                    ['ch_cookie_consent.yes' => 'true'],
-                    ['ch_cookie_consent.no' => 'false'],
-                ],
+        // if isSimplified then we have no categories
+//        if ($this->cookieConsentSimplified === false) {
+            foreach ($this->cookieCategories as $category) {
+                $builder->add($category, CheckboxType::class, [
+                    'data' => $this->cookieChecker->isCategoryAllowedByUser($category) ? true : false,
+                ]);
+                $builder->get($category)->addModelTransformer(new CallbackTransformer(
+                    function ($string): bool {
+                        // this is used to render the form field
+                        return 'true' == $string ? true : false;
+                    },
+                    function ($bool): string {
+                        // it transforms the submitted value back into the format you'll use in your code
+                        return $bool ? 'true' : 'false';
+                    }
+                ));
+            }
+//        }
+
+        if ($this->cookieConsentSimplified === false) {
+            // Accept all cookies button
+            $builder->add('use_all_cookies', SubmitType::class, [
+                'label' => 'cookie_consent_translation.use_all_cookies_button',
+                'attr' => [
+                    'class' => 'btn btn-success JS--Button-allowCookies JS--Button-acceptAllCookies vertical-col '
+                ]
+            ]);
+            // Accept cookies (only those selected)
+            $builder->add('use_only_selected', SubmitType::class, [
+                'label' => 'cookie_consent_translation.save_selected_button',
+                'attr' => [
+                    'class' => 'btn btn-success JS--Button-allowCookies JS--Button-onlySelected vertical-col '
+                ]
+            ]);
+            // Cookie settings button
+            $builder->add('show_cookie_settings', SubmitType::class, [
+                'label' => 'cookie_consent_translation.show_cookie_settings_button',
+                'attr' => [
+                    'class' => 'btn btn-secondary JS--Button-toggleDetails JS--Button-showSettings vertical-col '
+                ]
+            ]);
+            // Hide cookie settings button
+            $builder->add('hide_cookie_settings', SubmitType::class, [
+                'label' => 'cookie_consent_translation.hide_cookie_settings_button',
+                'attr' => [
+                    'class' => 'btn btn-secondary JS--Button-toggleDetails JS--Button-hideSettings vertical-col '
+                ]
+            ]);
+        } else {
+            $builder->add('use_all_cookies', SubmitType::class, [
+                'label' => 'cookie_consent_translation.use_all_cookies_button',
+                'attr' => [
+                    'class' => 'btn btn-success ch-cookie-consent__btnX ch-cookie-consent__btn--secondaryX JS--Button-allowCookies JS--Button-acceptAllCookies'
+                ]
             ]);
         }
 
-        if ($this->cookieConsentSimplified === false) {
-            $builder->add('save', SubmitType::class, ['label' => 'ch_cookie_consent.save', 'attr' => ['class' => 'btn ch-cookie-consent__btn']]);
-        } else {
-            $builder->add('use_only_functional_cookies', SubmitType::class, ['label' => 'ch_cookie_consent.use_only_functional_cookies', 'attr' => ['class' => 'btn ch-cookie-consent__btn']]);
-            $builder->add('use_all_cookies', SubmitType::class, ['label' => 'ch_cookie_consent.use_all_cookies', 'attr' => ['class' => 'btn ch-cookie-consent__btn ch-cookie-consent__btn--secondary']]);
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            $data = $event->getData();
 
-            $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
-                $data = $event->getData();
-
+            if (isset($data['use_all_cookies'])) {
                 foreach ($this->cookieCategories as $category) {
-                    $data[$category] = isset($data['use_all_cookies']) ? 'true' : 'false';
+                    $data[$category] = 'true';
                 }
+            }
 
-                $event->setData($data);
-            });
-        }
+            $event->setData($data);
+        });
+
     }
 
     /**
@@ -93,7 +126,7 @@ class CookieConsentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'translation_domain' => 'CHCookieConsentBundle',
+            'translation_domain' => 'CookieConsentBundle',
             'csrf_protection' => $this->csrfProtection,
         ]);
     }

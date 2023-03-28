@@ -2,19 +2,14 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the ConnectHolland CookieConsentBundle package.
- * (c) Connect Holland.
- */
-
-namespace ConnectHolland\CookieConsentBundle\Entity;
+namespace Stulipan\CookieConsentBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="ch_cookieconsent_log")
+ * @ORM\Table(name="cookie_consent_log")
  */
 class CookieConsentLog
 {
