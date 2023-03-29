@@ -77,9 +77,9 @@ AVG/GDPR requires all given cookie preferences of users to be explainable by the
 ![Database logging](https://raw.githubusercontent.com/ConnectHolland/cookie-consent-bundle/master/Resources/doc/log.png)
 
 ### Screenshots
-![Simplified](https://raw.githubusercontent.com/ConnectHolland/cookie-consent-bundle/master/Resources/doc/simplified.png)
-![Not simplified](https://raw.githubusercontent.com/ConnectHolland/cookie-consent-bundle/master/Resources/doc/not_simplified_01.png)
-![Not simplified](https://raw.githubusercontent.com/ConnectHolland/cookie-consent-bundle/master/Resources/doc/not_simplified_02.png)
+![Simplified](https://raw.githubusercontent.com/stulipan/CookieConsentBundle/master/Resources/doc/simplified.png)
+![Not simplified](https://raw.githubusercontent.com/stulipan/CookieConsentBundle/master/Resources/doc/not_simplified_01.png)
+![Not simplified](https://raw.githubusercontent.com/stulipan/CookieConsentBundle/master/Resources/doc/not_simplified_02.png)
 
 ### TwigExtension
 The following TwigExtension functions are available:
