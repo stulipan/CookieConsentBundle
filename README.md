@@ -4,10 +4,45 @@ Symfony bundle to append Cookie Consent to your website to comply to AVG/GDPR fo
 ## Installation
 
 ### Step 1: Download using composer
-In a Symfony application run this command to install and integrate Cookie Consent bundle in your application:
+
+[comment]: <> (In a Symfony application run this command to install and integrate Cookie Consent bundle in your application:)
+
+[comment]: <> (```bash)
+
+[comment]: <> (composer require stulipan/cookie-consent-bundle)
+
+[comment]: <> (```)
+
+Open your project's terminal or command prompt and navigate to the root directory of your Symfony project.
+
+Open the composer.json file of your Symfony project in a text editor.
+
+Look for the "require" section in the composer.json file. Add an entry for the bundle you want to install, specifying the GitHub repository and the version or branch you want to use. For example:
+
 ```bash
-composer require stulipan/cookie-consent-bundle
+"require": {
+    // ...
+    "stulipan/cookie-consent-bundle" : "dev-master"
+},
+"repositories": [
+    {
+    "type": "vcs",
+    "url": "https://github.com/stulipan/CookieConsentBundle.git"
+    }
+]
 ```
+
+Save the composer.json file.
+
+Run the following command in your project's terminal or command prompt to install the bundle:
+
+```bash
+composer update
+```
+
+Composer will fetch the bundle from the GitHub repository and install it along with its dependencies.
+
+Once the installation is complete, the bundle should be available for use in your Symfony project. You then need to configure and register the bundle as described bellow.
 
 ### Step 2: Enable the bundle
 When not using symfony flex, enable the bundle in the kernel manually:
@@ -35,20 +70,22 @@ cookie_consent:
 ```
 
 ### Step 4: Configure to your needs
-Configure your Cookie Consent with the following possible settings
+Configure your Cookie Consent with the following possible settings. 
 ```yaml
+# config/packages/cookie_consent.yml
+
 cookie_consent:
-    categories: # Below are the default supported categories
+    categories:               # Below are the default supported categories
         - 'statistics'
         - 'personalization'
         - 'marketing'
-    use_logger: false # Logs user actions to database
-    position: 'bottom' # values: top, bottom (default: bottom)
-    simplified: true # When set to true the user can only deny or accept all cookies at once
-    http_only: true # Sets HttpOnly on cookies
+    use_logger: false         # Logs user actions to database. [Under development] 
+    position: 'bottom'        # Values: 'top', 'bottom' (default: bottom)
+    simplified: true          # When set to true the user can only deny or accept all cookies at once
+    http_only: true           # Sets HttpOnly on cookies
     #   form_action: 'cookie-consent-success' #$routeName # When set, xhr-Requests will only be sent to this route. Take care of having the route available.
-    csrf_protection: true # The cookie consent form is csrf protected or not
-    privacy_policy_url: '/hu/policies/privacy-policy' # The Privacy or Cookie Policy URL
+    csrf_protection: true     # The cookie consent form is csrf protected or not
+    privacy_policy_url: '/hu/policies/privacy-policy'       # The Privacy or Cookie Policy URL
 ```
 
 ## Usage
