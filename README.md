@@ -108,10 +108,11 @@ When a user submits the form the preferences are saved as cookies. The cookies h
 - **CConsent_Key**: Generated key as identifier to the submitted Cookie Consent of the user
 - **CCategory_[CATEGORY]**: selected value of user (*true* or *false*)
 
-### Logging
-AVG/GDPR requires all given cookie preferences of users to be explainable by the webmasters. For this we log all cookie preferences to the database. IP addresses are anonymized. This option can be disabled in the config.
+[comment]: <> (### Logging)
 
-![Database logging](https://raw.githubusercontent.com/ConnectHolland/cookie-consent-bundle/master/Resources/doc/log.png)
+[comment]: <> (AVG/GDPR requires all given cookie preferences of users to be explainable by the webmasters. For this we log all cookie preferences to the database. IP addresses are anonymized. This option can be disabled in the config.)
+
+[comment]: <> (![Database logging]&#40;https://raw.githubusercontent.com/ConnectHolland/cookie-consent-bundle/master/Resources/doc/log.png&#41;)
 
 ### Screenshots
 ![Simplified](https://raw.githubusercontent.com/stulipan/CookieConsentBundle/master/Resources/doc/simplified.png)
