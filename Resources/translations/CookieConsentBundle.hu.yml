@@ -1,0 +1,20 @@
+cookie_consent_translation:
+    title: "A weboldal sütiket használ a felhasználói élmény növeléséhez. Tudj meg többet a <a href='{{ link }}'>sütik alkalmazásáról</a>."
+    intro: ""
+    necessary:
+        title: "A webhely működéséhez elengedhetetlen sütik"
+        description: "A szükséges sütik alapvető weboldal funkciókat tesznek lehetővé, például a felhasználói bejelentkezést vagy a kívánságlista mentését. A weboldal nem használható megfelelően a szükséges sütik nélkül."
+    statistics:
+        title: "Analitikai sütik"
+        description: "Ezek a sütik arra szolgálnak, hogy lássuk, hogyan használják a látogatók a weboldal, például analitikai sütik. Ezek a sütik nem alkalmasak egy adott látogató azonosítására."
+    personalization:
+        title: "Személyre szabás"
+        description: "A személyre szabás sütik arra szolgálnak, hogy megjegyezzünk látogatói információkat, például a nyelvet, az időzónát, a kosárban lévő termékeket, a kibővített tartalmakat."
+    marketing:
+        title: "Marketing sütik"
+        description: "Ezen sütik segítségével szokás azonosítani a látogatókat különböző weboldalak között, például tartalomszolgáltató partnerek, banner hálózatok. Ezeket a sütiket a vállalatok felhasználhatják a látogató érdeklődési körének profiljának kialakítására vagy releváns hirdetések megjelenítésére más webhelyeken."
+    save_selected_button: "Sütik mentése"
+    use_only_functional_cookies_button: "Alapvető sütik használata"
+    use_all_cookies_button: "Összes süti elfogadása"
+    show_cookie_settings_button: "Beállítások"
+    hide_cookie_settings_button: "Bezárás"

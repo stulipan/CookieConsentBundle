@@ -64,7 +64,7 @@ public function registerBundles()
 ### Step 3: Enable the routing
 When not using symfony flex, enable the bundles routing manually:
 ```yaml
-# app/config/routing.yml
+# config/routes.yaml
 cookie_consent:
   resource: "@CookieConsentBundle/Resources/config/routing.yaml"
 ```
@@ -72,7 +72,7 @@ cookie_consent:
 ### Step 4: Configure to your needs
 Configure your Cookie Consent with the following possible settings. 
 ```yaml
-# config/packages/cookie_consent.yml
+# config/packages/cookie_consent.yaml
 
 cookie_consent:
     categories:               # Below are the default supported categories
