@@ -27,6 +27,7 @@
             document.body.style.left = '0';
             document.body.style.right = '0';
             dialog.showModal();
+            dialog.focus();
         }
 
         function closeDialog() {

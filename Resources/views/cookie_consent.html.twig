@@ -24,12 +24,15 @@
     </div>
 
     {% if not simplified %}
-    <dialog class="cc-dialog" data-cc-dialog aria-labelledby="ccDialogTitle">
-        <button type="button" class="cc-dialog__close" data-cc-close aria-label="{{ 'cookie_consent_translation.hide_cookie_settings_button'|trans({}, 'CookieConsentBundle') }}">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>
-        </button>
-        <div class="cc-dialog__body">
+    <dialog class="cc-dialog" data-cc-dialog tabindex="-1" aria-labelledby="ccDialogTitle">
+        {# Fejléc: cím és bezárás, nem görög a tartalommal #}
+        <div class="cc-dialog__header">
             <h2 class="cc-dialog__title" id="ccDialogTitle">{{ 'cookie_consent_translation.settings_title'|trans({}, 'CookieConsentBundle') }}</h2>
+            <button type="button" class="cc-dialog__close" data-cc-close aria-label="{{ 'cookie_consent_translation.hide_cookie_settings_button'|trans({}, 'CookieConsentBundle') }}">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>
+            </button>
+        </div>
+        <div class="cc-dialog__body">
             <div class="cc-dialog__intro">{{ 'cookie_consent_translation.settings_intro'|trans({'{{ link }}': privacyPolicyUrl}, 'CookieConsentBundle')|raw }}</div>
 
             {# Kategóriák: a leírás a nyílra kattintva nyílik le #}
