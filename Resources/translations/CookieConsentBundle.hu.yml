@@ -1,5 +1,5 @@
 cookie_consent_translation:
-    title: "A weboldal sütiket használ a felhasználói élmény növeléséhez. Tudj meg többet a <a href='{{ link }}'>sütik alkalmazásáról</a>."
+    title: "Sütiket használunk a jobb vásárlási élményért. <a href='{{ link }}'>Részletek</a>"
     intro: ""
     necessary:
         title: "A webhely működéséhez elengedhetetlen sütik"
@@ -15,6 +15,6 @@ cookie_consent_translation:
         description: "Ezen sütik segítségével szokás azonosítani a látogatókat különböző weboldalak között, például tartalomszolgáltató partnerek, banner hálózatok. Ezeket a sütiket a vállalatok felhasználhatják a látogató érdeklődési körének profiljának kialakítására vagy releváns hirdetések megjelenítésére más webhelyeken."
     save_selected_button: "Sütik mentése"
     use_only_functional_cookies_button: "Alapvető sütik használata"
-    use_all_cookies_button: "Összes süti elfogadása"
+    use_all_cookies_button: "Sütik elfogadása"
     show_cookie_settings_button: "Beállítások"
     hide_cookie_settings_button: "Bezárás"

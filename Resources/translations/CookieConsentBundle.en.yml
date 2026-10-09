@@ -1,5 +1,5 @@
 cookie_consent_translation:
-    title: 'This site uses cookies to offer you a better browsing experience. Find out more on <a href="{{ link }}">how we use cookies</a>.'
+    title: "We use cookies for a better shopping experience. <a href='{{ link }}'>Learn more</a>"
     intro: ''
     necessary:
         title: 'Strictly necessary cookies'
@@ -15,6 +15,6 @@ cookie_consent_translation:
         description: 'These are used to identify visitors between different websites, eg. content partners, banner networks. Those cookies may be used by companies to build a profile of visitor interests or show relevant ads on other websites.'
     save_selected_button: 'Save selected'
     use_only_functional_cookies_button: 'Only essential cookies'
-    use_all_cookies_button: 'Accept all cookies'
+    use_all_cookies_button: "Accept cookies"
     show_cookie_settings_button: 'Cookie settings'
     hide_cookie_settings_button: 'Close'
