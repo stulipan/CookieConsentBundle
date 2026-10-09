@@ -73,21 +73,24 @@ class CookieConsentType extends AbstractType
             $builder->add('use_all_cookies', SubmitType::class, [
                 'label' => 'cookie_consent_translation.use_all_cookies_button',
                 'attr' => [
-                    'class' => 'btn btn-success JS--Button-allowCookies'
+                    'class' => 'cc-btn cc-btn--primary',
+                    'data-cc-submit' => '',
                 ]
             ]);
             // Csak a kiválasztott kategóriák (a beállítások ablakban)
             $builder->add('use_only_selected', SubmitType::class, [
                 'label' => 'cookie_consent_translation.save_selected_button',
                 'attr' => [
-                    'class' => 'btn btn-secondary JS--Button-allowCookies'
+                    'class' => 'cc-btn cc-btn--secondary',
+                    'data-cc-submit' => '',
                 ]
             ]);
         } else {
             $builder->add('use_all_cookies', SubmitType::class, [
                 'label' => 'cookie_consent_translation.use_all_cookies_button',
                 'attr' => [
-                    'class' => 'btn btn-success ch-cookie-consent__btnX ch-cookie-consent__btn--secondaryX JS--Button-allowCookies JS--Button-acceptAllCookies'
+                    'class' => 'cc-btn cc-btn--primary',
+                    'data-cc-submit' => '',
                 ]
             ]);
         }

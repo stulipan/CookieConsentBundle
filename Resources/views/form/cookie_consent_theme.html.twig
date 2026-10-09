@@ -1,19 +1,6 @@
-{# Egy kategória sor: nyíl + cím (a leírás lenyílik), jobbra a kapcsoló #}
+{# Kategória kapcsoló: a közös kategória sorral (_category.html.twig) #}
 {% block checkbox_row -%}
-    <div class="cconsent-category">
-        <div class="cconsent-category-head">
-            <button type="button" class="cconsent-category-toggle collapsed" data-toggle="collapse" data-target="#cconsent-desc-{{ name }}" aria-expanded="false" aria-controls="cconsent-desc-{{ name }}">
-                <svg class="icon"><use xlink:href="#chevron-down"></use></svg>
-                <span class="cconsent-category-title">{{ ('cookie_consent_translation.'~name~'.title')|trans({}, 'CookieConsentBundle') }}</span>
-            </button>
-            <div class="custom-control custom-switch">
-                <input type="checkbox" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" class="custom-control-input" value="{{ form.vars.value }}" {{ form.vars.checked == 1 ? 'checked="checked"' : '' }}>
-                <label class="custom-control-label" for="{{ form.vars.id }}"><span class="sr-only">{{ ('cookie_consent_translation.'~name~'.title')|trans({}, 'CookieConsentBundle') }}</span></label>
-            </div>
-        </div>
-        <div id="cconsent-desc-{{ name }}" class="collapse">
-            <p class="cconsent-category-description">{{ ('cookie_consent_translation.'~name~'.description')|trans({}, 'CookieConsentBundle') }}</p>
-        </div>
-    </div>
+    {% set input %}<input type="checkbox" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" value="{{ form.vars.value }}"{% if form.vars.checked %} checked{% endif %}>{% endset %}
+    {% include '@CookieConsent/_category.html.twig' with {'name': name, 'input': input} %}
     {% do form.setRendered() %}
 {%- endblock %}

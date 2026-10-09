@@ -1,0 +1,20 @@
+{# Egy kategória: nyíl + cím (a leírás lenyílik), jobbra a kapcsoló; name, input (a kapcsoló <input>-ja), badge (opcionális) #}
+<div class="cc-category">
+    <details>
+        <summary>
+            <svg class="cc-category__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+            <span>{{ ('cookie_consent_translation.'~name~'.title')|trans({}, 'CookieConsentBundle') }}</span>
+        </summary>
+        <div class="cc-category__description">{{ ('cookie_consent_translation.'~name~'.description')|trans({}, 'CookieConsentBundle') }}</div>
+    </details>
+    <div class="cc-category__controls">
+        {% if badge is defined and badge %}
+            <span class="cc-badge">{{ badge }}</span>
+        {% endif %}
+        <label class="cc-switch">
+            {{ input|raw }}
+            <span class="cc-switch__track"></span>
+            <span class="cc-sr-only">{{ ('cookie_consent_translation.'~name~'.title')|trans({}, 'CookieConsentBundle') }}</span>
+        </label>
+    </div>
+</div>

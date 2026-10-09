@@ -1,0 +1,293 @@
+/*
+ * Cookie Consent: önálló stílus, nem kell hozzá Bootstrap.
+ * Az oldal a --cc-* változókkal a saját színeire állíthatja, pl. :root { --cc-accent: #198754; }
+ * Az alapértékek a var() tartalékában vannak, így a betöltési sorrendtől függetlenül az oldal beállítása nyer.
+ */
+
+/* Süti sáv: kis, lebegő doboz kerettel, nem ér az oldal aljához és széleihez */
+.cc-banner {
+  position: fixed;
+  z-index: var(--cc-z-index, 1030);
+  left: var(--cc-offset, 16px);
+  bottom: var(--cc-offset, 16px);
+  box-sizing: border-box;
+  width: var(--cc-width, 420px);
+  max-width: calc(100% - 2 * var(--cc-offset, 16px));
+  padding: 1rem 1rem .875rem;
+  font-family: var(--cc-font-family, inherit);
+  background: var(--cc-bg, #1f1f1f);
+  color: var(--cc-color, #ffffff);
+  border: 1px solid var(--cc-border-color, rgba(255, 255, 255, .18));
+  border-radius: var(--cc-radius, .75rem);
+  box-shadow: var(--cc-shadow, 0 10px 30px rgba(0, 0, 0, .3));
+}
+.cc-banner--top {
+  top: var(--cc-offset, 16px);
+  bottom: auto;
+}
+.cc-banner--simplified {
+  width: 300px;
+  text-align: center;
+}
+.cc-banner a,
+.cc-banner a:hover,
+.cc-banner a:focus {
+  color: inherit;
+  text-decoration: underline;
+}
+.cc-banner__text {
+  margin: 0 0 .75rem;
+  font-size: .875rem;
+  line-height: 1.45;
+  opacity: .9;
+}
+
+/* Gombok: egy sorban, középen, egyforma szélesek */
+.cc-actions {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+}
+.cc-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  padding: .5rem .75rem;
+  font-family: inherit;
+  font-size: var(--cc-btn-font-size, .75rem);
+  font-weight: var(--cc-btn-font-weight, 600);
+  line-height: 1.5;
+  letter-spacing: .04em;
+  text-transform: var(--cc-btn-transform, none);
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: var(--cc-btn-radius, .25rem);
+}
+.cc-btn--primary {
+  background: var(--cc-accent, #2e7d32);
+  border-color: var(--cc-accent, #2e7d32);
+  color: var(--cc-accent-color, #ffffff);
+}
+.cc-btn--secondary {
+  background: var(--cc-secondary-bg, #ececec);
+  border-color: var(--cc-secondary-bg, #ececec);
+  color: var(--cc-secondary-color, #1f1f1f);
+}
+.cc-btn:hover {
+  filter: brightness(.94);
+}
+.cc-btn:focus-visible {
+  outline: 2px solid var(--cc-accent, #2e7d32);
+  outline-offset: 2px;
+}
+
+/* Beállítások ablak: a böngésző <dialog> eleme, a képernyőn belül marad, a tartalma görgethető */
+.cc-dialog {
+  box-sizing: border-box;
+  width: calc(100% - 2rem);
+  max-width: var(--cc-dialog-width, 480px);
+  max-height: calc(100% - 2rem);
+  padding: 0;
+  font-family: var(--cc-font-family, inherit);
+  background: var(--cc-dialog-bg, #ffffff);
+  color: var(--cc-dialog-color, #1f1f1f);
+  border: 0;
+  border-radius: var(--cc-radius, .75rem);
+  box-shadow: var(--cc-shadow, 0 10px 30px rgba(0, 0, 0, .3));
+  overscroll-behavior: contain;
+}
+.cc-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+.cc-dialog::backdrop {
+  background: var(--cc-backdrop, rgba(33, 43, 54, .3));
+}
+.cc-dialog__close {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  color: inherit;
+  cursor: pointer;
+}
+.cc-dialog__close:hover {
+  background: var(--cc-category-bg, #f4f5f6);
+}
+.cc-dialog__body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 1.25rem 1.25rem 1rem;
+  font-size: .875rem;
+  line-height: 1.4;
+}
+.cc-dialog__title {
+  margin: 0 2rem .5rem 0;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+.cc-dialog__intro {
+  margin: 0 0 1rem;
+  opacity: .85;
+}
+.cc-dialog__intro a {
+  color: inherit;
+}
+.cc-dialog__footer {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--cc-category-bg, #f4f5f6);
+}
+
+/* Kategória: a leírás a nyílra kattintva nyílik le (<details>), jobbra a kapcsoló */
+.cc-category {
+  position: relative;
+  margin-bottom: .5rem;
+  background: var(--cc-category-bg, #f4f5f6);
+  border-radius: var(--cc-radius, .75rem);
+}
+.cc-category:last-child {
+  margin-bottom: 0;
+}
+.cc-category summary {
+  box-sizing: content-box; /* a kapcsoló magasságához igazodik, a host oldal box-sizingjától függetlenül */
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 1.5rem;
+  padding: .625rem 8rem .625rem .75rem;
+  font-weight: 700;
+  line-height: 1.3;
+  list-style: none;
+  cursor: pointer;
+}
+.cc-category summary::-webkit-details-marker {
+  display: none;
+}
+/* Kattintásra nincs keret, csak billentyűs navigációnál egy halvány jelzés */
+.cc-category summary:focus {
+  outline: none;
+}
+.cc-category summary:focus-visible {
+  border-radius: var(--cc-radius, .75rem);
+  box-shadow: inset 0 0 0 2px var(--cc-badge-bg, #e1e5e9);
+}
+.cc-category__chevron {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  transition: transform .2s ease;
+}
+.cc-category details[open] .cc-category__chevron {
+  transform: rotate(180deg);
+}
+.cc-category__description {
+  margin: 0;
+  padding: 0 .75rem .75rem 2.25rem;
+  opacity: .85;
+}
+.cc-category__controls {
+  position: absolute;
+  top: .625rem;
+  right: .75rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  height: 1.5rem;
+}
+.cc-badge {
+  padding: .125rem .5rem;
+  font-size: .6875rem;
+  font-weight: 700;
+  background: var(--cc-badge-bg, #e1e5e9);
+  border-radius: 50rem;
+  white-space: nowrap;
+}
+
+/* Kapcsoló */
+.cc-switch {
+  position: relative;
+  display: inline-block;
+  width: 2.25rem;
+  height: 1.25rem;
+  margin: 0;
+  cursor: pointer;
+}
+.cc-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: inherit;
+}
+.cc-switch__track {
+  position: absolute;
+  inset: 0;
+  background: var(--cc-switch-off, #c4c9cf);
+  border-radius: 50rem;
+  transition: background-color .2s ease;
+}
+.cc-switch__track::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(1.25rem - 4px);
+  height: calc(1.25rem - 4px);
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform .2s ease;
+}
+.cc-switch input:checked + .cc-switch__track {
+  background: var(--cc-accent, #2e7d32);
+}
+.cc-switch input:checked + .cc-switch__track::after {
+  transform: translateX(1rem);
+}
+.cc-switch input:disabled + .cc-switch__track {
+  background: var(--cc-switch-disabled, #6d7175);
+  cursor: default;
+}
+.cc-switch input:focus-visible + .cc-switch__track {
+  outline: 2px solid var(--cc-accent, #2e7d32);
+  outline-offset: 2px;
+}
+
+.cc-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (max-width: 767.98px) {
+  .cc-banner {
+    left: var(--cc-offset-mobile, 12px);
+    right: var(--cc-offset-mobile, 12px);
+    bottom: var(--cc-offset-mobile, 12px);
+    width: auto;
+    max-width: none;
+  }
+  .cc-banner--top {
+    top: var(--cc-offset-mobile, 12px);
+    bottom: auto;
+  }
+}
