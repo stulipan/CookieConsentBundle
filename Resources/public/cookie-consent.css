@@ -104,6 +104,7 @@
 .cc-dialog[open] {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .cc-dialog::backdrop {
   background: var(--cc-backdrop, rgba(33, 43, 54, .3));
@@ -128,6 +129,7 @@
 }
 .cc-dialog__body {
   flex: 1 1 auto;
+  min-height: 0; /* Safari: enélkül a lista nem zsugorodik a helyére, és nem görget */
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
