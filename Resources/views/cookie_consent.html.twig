@@ -1,7 +1,7 @@
 {% form_theme form '@CookieConsent/form/cookie_consent_theme.html.twig' %}
 
 {# Önálló süti sáv: saját CSS és JS (Resources/public), nem kell hozzá Bootstrap vagy jQuery; szövegekhez div, hogy az oldal p-szabályai ne hassanak rá #}
-<link rel="stylesheet" href="{{ asset('bundles/cookieconsent/cookie-consent.css') }}">
+<link rel="stylesheet" href="{{ asset('bundles/cookieconsent/cookie-consent.css') }}?v={{ assetVersion }}">
 
 <div class="cc-wrapper" data-cc-wrapper>
     {{ form_start(form) }}
@@ -60,4 +60,4 @@
     {{ form_end(form) }}
 </div>
 
-<script src="{{ asset('bundles/cookieconsent/cookie-consent.js') }}"></script>
+<script src="{{ asset('bundles/cookieconsent/cookie-consent.js') }}?v={{ assetVersion }}"></script>

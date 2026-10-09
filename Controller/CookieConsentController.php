@@ -94,6 +94,8 @@ class CookieConsentController
                 'position'   => $this->cookieConsentPosition,
                 'simplified' => $this->cookieConsentSimplified,
                 'privacyPolicyUrl' => $this->privacyPolicyUrl,
+                // A CSS/JS címébe a módosítás ideje kerül, így a böngésző sosem a régit használja
+                'assetVersion' => max(filemtime(__DIR__.'/../Resources/public/cookie-consent.css'), filemtime(__DIR__.'/../Resources/public/cookie-consent.js')),
             ])
         );
 
