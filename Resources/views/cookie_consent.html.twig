@@ -1,61 +1,73 @@
 {% form_theme form '@CookieConsent/form/cookie_consent_theme.html.twig' %}
 
-{#{% block script %}#}
-{#    <script type="text/javascript" src="{{ asset('bundles/chcookieconsent/js/cookie_consent.js') }}"></script>#}
-{#{% endblock %}#}
+{# Egy űrlap: alul a süti sáv, a "Beállítások" / "Részletek" a beállítások ablakot nyitja (Bootstrap modal) #}
+<div class="JS--Wrapper-cookieConsent">
+    {{ form_start(form, {'attr': {'class': 'JS--Wrapper-cookieConsentForm'}}) }}
 
-<div class="cconsent-wrapper cconsent--fixed cconsent--{{ position }} {% if simplified %}cconsent--simplified{% endif %} JS--Wrapper-cookieConsent">
-    <div class="container">
-        <div class="cconsent-body">
-            {% block title %}
-                <div class="cconsent-description">
-                    <p>{{ 'cookie_consent_translation.title'|trans({ '{{ link }}': privacyPolicyUrl}, 'CookieConsentBundle')|raw }}</p>
+    <div class="cconsent-wrapper cconsent--fixed cconsent--{{ position }} {% if simplified %}cconsent--simplified{% endif %}" role="region" aria-label="{{ 'cookie_consent_translation.settings_title'|trans({}, 'CookieConsentBundle') }}">
+        {% block title %}
+            <p class="cconsent-description">
+                {{ 'cookie_consent_translation.title'|trans({}, 'CookieConsentBundle') }}
+                {% if not simplified %}
+                    <a href="#" data-toggle="modal" data-target=".JS--Modal-cookieSettings">{{ 'cookie_consent_translation.details_link'|trans({}, 'CookieConsentBundle') }}</a>
+                {% endif %}
+            </p>
+        {% endblock %}
+        <div class="cconsent-actions">
+            {{ form_widget(form.use_all_cookies) }}
+            {% if not simplified %}
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".JS--Modal-cookieSettings">{{ 'cookie_consent_translation.show_cookie_settings_button'|trans({}, 'CookieConsentBundle') }}</button>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if not simplified %}
+    <div class="modal fade cconsent-modal JS--Modal-cookieSettings" tabindex="-1" role="dialog" aria-labelledby="cconsentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            {% endblock %}
+                <div class="modal-body">
+                    <h2 class="modal-title" id="cconsentModalLabel">{{ 'cookie_consent_translation.settings_title'|trans({}, 'CookieConsentBundle') }}</h2>
+                    <p class="cconsent-intro">{{ 'cookie_consent_translation.settings_intro'|trans({'{{ link }}': privacyPolicyUrl}, 'CookieConsentBundle')|raw }}</p>
 
-            <div class="cconsent-form">
-                {{ form_start(form, {'attr': {'class': 'JS--Wrapper-cookieConsentForm'}}) }}
-                <div class="JS--Wrapper-categoryGroup cconsent-category-group">
-                    <div class="cconsent-category-item">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" id="_necessary" name="_necessary" required="required" class="custom-control-input" checked disabled>
-                            <label class="custom-control-label" for="_necessary">&nbsp;
-                                <span class="invalid-feedback"></span>
-                            </label>
-                        </div>
-                        <div>
-                            <h5 class="cconsent-category-title">{{ ('cookie_consent_translation.necessary.title')|trans({}, 'CookieConsentBundle') }}</h5>
-                            <small class="cconsent-category-description">{{ ('cookie_consent_translation.necessary.description')|trans({}, 'CookieConsentBundle') }}</small>
-                        </div>
-                    </div>
-
-                    {% for child in form %}
-                        {% if child.vars.block_prefixes[0] != 'button' %}
-                            <div class="cconsent-category-item">
-                                {{ form_row(child) }}
+                    {# Kategóriák: a leírás a nyílra kattintva nyílik le #}
+                    <div class="cconsent-categories">
+                        <div class="cconsent-category">
+                            <div class="cconsent-category-head">
+                                <button type="button" class="cconsent-category-toggle collapsed" data-toggle="collapse" data-target="#cconsent-desc-necessary" aria-expanded="false" aria-controls="cconsent-desc-necessary">
+                                    <svg class="icon"><use xlink:href="#chevron-down"></use></svg>
+                                    <span class="cconsent-category-title">{{ 'cookie_consent_translation.necessary.title'|trans({}, 'CookieConsentBundle') }}</span>
+                                </button>
+                                <span class="cconsent-badge">{{ 'cookie_consent_translation.always_active'|trans({}, 'CookieConsentBundle') }}</span>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" id="_necessary" name="_necessary" class="custom-control-input" checked disabled>
+                                    <label class="custom-control-label" for="_necessary"><span class="sr-only">{{ 'cookie_consent_translation.necessary.title'|trans({}, 'CookieConsentBundle') }}</span></label>
+                                </div>
                             </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
+                            <div id="cconsent-desc-necessary" class="collapse">
+                                <p class="cconsent-category-description">{{ 'cookie_consent_translation.necessary.description'|trans({}, 'CookieConsentBundle') }}</p>
+                            </div>
+                        </div>
 
-                    <div class="cconsent-actions vertical-row">
-                        {{ form_rest(form) }}
+                        {% for child in form %}
+                            {% if child.vars.block_prefixes[0] != 'button' %}
+                                {{ form_row(child) }}
+                            {% endif %}
+                        {% endfor %}
                     </div>
-
-
-{#                    {% if not simplified %}#}
-{#                        {% block toggle_details %}#}
-{#                            <div class="d-flex align-self-end mt-2">#}
-{#                                <div class="JS--Button-toggleDetails ch-cookie-consent__toggle-detailsX mb-0X">#}
-{#                                    <span class="ch-cookie-consent__toggle-details-show">{{ 'cookie_consent_translation.show_details'|trans({}, 'CookieConsentBundle') }}</span>#}
-{#                                    <span class="ch-cookie-consent__toggle-details-hide">{{ 'cookie_consent_translation.hide_details'|trans({}, 'CookieConsentBundle') }}</span>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        {% endblock %}#}
-{#                    {% endif %}#}
-                {{ form_end(form) }}
+                </div>
+                <div class="modal-footer">
+                    {{ form_widget(form.use_only_selected) }}
+                    <button type="submit" name="{{ form.use_all_cookies.vars.full_name }}" class="btn btn-success JS--Button-allowCookies">{{ 'cookie_consent_translation.accept_all_button'|trans({}, 'CookieConsentBundle') }}</button>
+                </div>
             </div>
         </div>
-
     </div>
+    {% endif %}
+
+    {{ form_end(form) }}
 </div>

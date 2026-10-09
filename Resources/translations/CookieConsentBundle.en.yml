@@ -1,8 +1,13 @@
 cookie_consent_translation:
-    title: "We use cookies for a better shopping experience. <a href='{{ link }}'>Learn more</a>"
+    title: "We use cookies for a better shopping experience."
+    details_link: "Learn more"
+    settings_title: "Cookie settings"
+    settings_intro: "Cookies are small files stored by your browser. Here you can choose which categories you allow. More in our <a href='{{ link }}'>privacy policy</a>."
+    always_active: "Always active"
+    accept_all_button: "Accept all"
     intro: ''
     necessary:
-        title: 'Strictly necessary cookies'
+        title: 'Necessary cookies'
         description: 'Strictly necessary cookies allow core website functionality such as user login or saving a wish list. The website cannot be used properly without strictly necessary cookies.'
     statistics:
         title: 'Performance cookies'
@@ -13,7 +18,7 @@ cookie_consent_translation:
     marketing:
         title: 'Marketing cookies'
         description: 'These are used to identify visitors between different websites, eg. content partners, banner networks. Those cookies may be used by companies to build a profile of visitor interests or show relevant ads on other websites.'
-    save_selected_button: 'Save selected'
+    save_selected_button: "Save settings"
     use_only_functional_cookies_button: 'Only essential cookies'
     use_all_cookies_button: "Accept cookies"
     show_cookie_settings_button: 'Cookie settings'

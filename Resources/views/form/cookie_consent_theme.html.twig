@@ -1,21 +1,19 @@
+{# Egy kategória sor: nyíl + cím (a leírás lenyílik), jobbra a kapcsoló #}
 {% block checkbox_row -%}
-    {% if not form.rendered %}
-    <div class="custom-control custom-switch">
-        <input type="checkbox" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" required="required" class="custom-control-input" value="{{ form.vars.value }}" {{ form.vars.checked == 1 ? 'checked=\"checked\"' : ''}}>
-        <label class="custom-control-label" for="{{ form.vars.id }}">&nbsp;
-            <span class="invalid-feedback"></span>
-        </label>
+    <div class="cconsent-category">
+        <div class="cconsent-category-head">
+            <button type="button" class="cconsent-category-toggle collapsed" data-toggle="collapse" data-target="#cconsent-desc-{{ name }}" aria-expanded="false" aria-controls="cconsent-desc-{{ name }}">
+                <svg class="icon"><use xlink:href="#chevron-down"></use></svg>
+                <span class="cconsent-category-title">{{ ('cookie_consent_translation.'~name~'.title')|trans({}, 'CookieConsentBundle') }}</span>
+            </button>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" class="custom-control-input" value="{{ form.vars.value }}" {{ form.vars.checked == 1 ? 'checked="checked"' : '' }}>
+                <label class="custom-control-label" for="{{ form.vars.id }}"><span class="sr-only">{{ ('cookie_consent_translation.'~name~'.title')|trans({}, 'CookieConsentBundle') }}</span></label>
+            </div>
+        </div>
+        <div id="cconsent-desc-{{ name }}" class="collapse">
+            <p class="cconsent-category-description">{{ ('cookie_consent_translation.'~name~'.description')|trans({}, 'CookieConsentBundle') }}</p>
+        </div>
     </div>
-    {% endif %}
-    <div>
-        <h5 class="cconsent-category-title">{{ ('cookie_consent_translation.'~name~'.title')|trans({}, 'CookieConsentBundle') }}</h5>
-        <small class="cconsent-category-description">{{ ('cookie_consent_translation.'~name~'.description')|trans({}, 'CookieConsentBundle') }}</small>
-    </div>
-{% endblock %}
-
-{% block submit_row %}
-    <div class="vertical-col">
-        {{ block('button_widget') }}
-    </div>
-{% endblock %}
-
+    {% do form.setRendered() %}
+{%- endblock %}

@@ -69,32 +69,18 @@ class CookieConsentType extends AbstractType
 //        }
 
         if ($this->cookieConsentSimplified === false) {
-            // Accept all cookies button
+            // Összes süti elfogadása (a sávban; a beállítások ablakban ugyanezt a gombot a sablon rendereli)
             $builder->add('use_all_cookies', SubmitType::class, [
                 'label' => 'cookie_consent_translation.use_all_cookies_button',
                 'attr' => [
-                    'class' => 'btn btn-success JS--Button-allowCookies JS--Button-acceptAllCookies vertical-col '
+                    'class' => 'btn btn-success JS--Button-allowCookies'
                 ]
             ]);
-            // Accept cookies (only those selected)
+            // Csak a kiválasztott kategóriák (a beállítások ablakban)
             $builder->add('use_only_selected', SubmitType::class, [
                 'label' => 'cookie_consent_translation.save_selected_button',
                 'attr' => [
-                    'class' => 'btn btn-success JS--Button-allowCookies JS--Button-onlySelected vertical-col '
-                ]
-            ]);
-            // Cookie settings button
-            $builder->add('show_cookie_settings', SubmitType::class, [
-                'label' => 'cookie_consent_translation.show_cookie_settings_button',
-                'attr' => [
-                    'class' => 'btn btn-secondary JS--Button-toggleDetails JS--Button-showSettings vertical-col '
-                ]
-            ]);
-            // Hide cookie settings button
-            $builder->add('hide_cookie_settings', SubmitType::class, [
-                'label' => 'cookie_consent_translation.hide_cookie_settings_button',
-                'attr' => [
-                    'class' => 'btn btn-secondary JS--Button-toggleDetails JS--Button-hideSettings vertical-col '
+                    'class' => 'btn btn-secondary JS--Button-allowCookies'
                 ]
             ]);
         } else {
